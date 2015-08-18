@@ -1,0 +1,12 @@
+<tr>
+    <td class="buildNumber">
+        # 777
+    </td>
+    <td>
+        <img onmouseover='--- "BuidStatusTooltip" ---'/>
+        <a href="BuidResultsLink"><span id="build:000000:text">BuidResults</span></a>
+    </td>
+    <td class="changesColumn">
+        <a href="BuildChangesLink">BuildChanges</a>
+    </td>
+</tr>

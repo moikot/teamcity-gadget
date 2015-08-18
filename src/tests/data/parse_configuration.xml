@@ -1,0 +1,6 @@
+<div class="buildConfigurationName">
+    <span>
+        <img onmouseover='--- "ConfigurationStatusTooltip" ---'/>
+    </span>
+    <a class="buildTypeName" style="" href="a href">Release</a>
+</div>

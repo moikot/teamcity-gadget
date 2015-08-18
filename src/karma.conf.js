@@ -16,7 +16,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'scripts/*.js',
-      'tests/*karma.js'
+      'tests/*karma.js',
+      {pattern: 'tests/data/*.xml', included: false}
     ],
 
 
@@ -63,4 +64,4 @@ module.exports = function(config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false
   })
-}
+};

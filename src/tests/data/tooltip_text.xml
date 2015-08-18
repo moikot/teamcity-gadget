@@ -1,0 +1,7 @@
+<div>
+    <div id="Embeded" onmouseover='--- "ToolTipText%26lt;br/%26gt;BuildAgent%26lt;a href=\%26#034;link\%26#034; title=\%26#034;title\%26#034;%26gt;Server%26lt;/a%26gt;" ---'></div>
+    <div id="EmbededPersonal" onmouseover='--- "ToolTipText%26lt;br/%26gt;Personal%26lt;br/%26gt;BuildAgent%26lt;a href=\%26#034;link\%26#034; title=\%26#034;title\%26#034;%26gt;Server%26lt;/a%26gt;" ---'></div>
+    <div id="Linked" onmouseover='--- "dataHover_2" ---'></div>
+    <div id="dataHover_2">ToolTipText<br/>BuildAgent<a href="link" title="title">Server</a></div>
+    <div id="EmbededV65" onmouseover='BS.Tooltip.showMessage(this, {shift:{x:10, y:5}, hideDelay: 10}, "Paused by %26lt;strong%26gt;Sergey Anisimov%26lt;\/strong%26gt;%26amp;nbsp;%26lt;span class=\%26#034;date\%26#034; title=\%26#034;10 hours ago\%26#034;%26gt;10 hours ago%26lt;\/span%26gt;%26lt;br\/%26gt;Comment: TestMessage%26lt;br%26gt;");'></div>
+</div>
