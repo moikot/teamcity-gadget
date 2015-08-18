@@ -1,0 +1,389 @@
+<html>
+<head>
+    <title>HTML parser tests</title>
+
+    <script type="text/javascript" language="javascript" src="../../../jsunit2_2/jsunit/app/jsUnitCore.js"></script>
+
+    <script type="text/javascript" language="javascript" src="../scripts/environment.js"></script>
+
+    <script type="text/javascript" language="javascript">
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Messages
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_Msg_Server_Not_Defined() {
+            assertNotEquals("", Msg.ServerNotDefined());
+        }
+
+        function test_Msg_Server_Url_Invalid() {
+            assertNotEquals("", Msg.ServerUrlInvalid());
+        }
+
+        function test_Msg_Connection_Error() {
+            assertNotEquals("", Msg.ConnectionError());
+        }
+
+        function test_Msg_Login_Request() {
+            assertNotEquals("", Msg.LoginRequest());
+        }
+
+        function test_Msg_Maintenance() {
+            assertNotEquals("", Msg.Maintenance());
+        }
+
+        function test_Msg_Invalid_Response() {
+            assertNotEquals("", Msg.InvalidResponse());
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Server URL validation tests
+        ///////////////////////////////////////////////////////////////////////////////
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Valid
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_Simply_Valid_Url() {
+            var result = Validation.ValidateAddress("simple")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Simply_Capital_Valid_Url() {
+            var result = Validation.ValidateAddress("SIMPLE")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Http_Valid_Url() {
+            var result = Validation.ValidateAddress("http:simple")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Http_Capital_Valid_Url() {
+            var result = Validation.ValidateAddress("HTTP:simple")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Https_Valid_Url() {
+            var result = Validation.ValidateAddress("https:simple")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Https_Capital_Valid_Url() {
+            var result = Validation.ValidateAddress("HTTPS:simple")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Http_BS_Valid_Url() {
+            var result = Validation.ValidateAddress("http:/simple")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Http_BS_BS_Valid_Url() {
+            var result = Validation.ValidateAddress("http://simple")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Http_Trailing_BS_Valid_Url() {
+            var result = Validation.ValidateAddress("http://simple/")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Http_With_Port_Valid_Url() {
+            var result = Validation.ValidateAddress("simple:124")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Http_IP_Ardders_Valid_Url() {
+            var result = Validation.ValidateAddress("123.23.1.132")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Http_IPv6_Ardders_Valid_Url() {
+            var result = Validation.ValidateAddress("ff06:0:0:0:0:0:0:c3")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Http_IPv6_Double_Colons_Ardders_Valid_Url() {
+            var result = Validation.ValidateAddress("ff06::c3")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_Http_With_Port_And_Sub_Page_Valid_Url() {
+            var result = Validation.ValidateAddress("http://domain:8082/teamcity")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        function test_ValidateAddress_HttpWithLoginAndPassword_IsValid() {
+            var result = Validation.ValidateAddress("http://login:password@domain:8082/teamcity/")
+            assertEquals(ValidationResult.Valid, result);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // NotDefined
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_Not_Defined_Url() {
+            var result = Validation.ValidateAddress("")
+            assertEquals(ValidationResult.NotDefined, result);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Invalid
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_Wrong_Symbol_Url() {
+            var result = Validation.ValidateAddress("ab#cd")
+            assertEquals(ValidationResult.Invalid, result);
+        }
+
+        function test_Wrong_Start_Url() {
+            var result = Validation.ValidateAddress("ftp:")
+            assertEquals(ValidationResult.Invalid, result);
+        }
+
+        function test_Extra_BS_Url() {
+            var result = Validation.ValidateAddress("http:///simple")
+            assertEquals(ValidationResult.Invalid, result);
+        }
+
+        function test_Start_With_Dot_Url() {
+            var result = Validation.ValidateAddress(".abc")
+            assertEquals(ValidationResult.Invalid, result);
+        }
+
+        function test_End_With_Dot_Url() {
+            var result = Validation.ValidateAddress("abc.")
+            assertEquals(ValidationResult.Invalid, result);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Server URL normalization tests
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_Do_Not_Normalize_Normal_url() {
+            var result = Validation.NormalizeAddress("http://server")
+            assertEquals("http://server", result);
+        }
+
+        function test_Add_HttpAuth_For_Basic_Authentication() {
+            var result = Validation.NormalizeAddress("http://server", true)
+            assertEquals("http://server/httpAuth", result);
+        }
+
+        function test_Do_Not_Normalize_Invalid_url() {
+            var result = Validation.NormalizeAddress("ab#cd")
+            assertEquals("ab#cd", result);
+        }
+
+        function test_Add_Http_If_Missed() {
+            var result = Validation.NormalizeAddress("server")
+            assertEquals("http://server", result);
+        }
+
+        function test_Http_Trailing_BS_Is_Not_Included_In_Valid_Url() {
+            var result = Validation.NormalizeAddress("http://server/")
+            assertEquals("http://server", result);
+        }
+
+        function test_Add_BSBS_If_Missed() {
+            var result = Validation.NormalizeAddress("http:154.123.12:55444")
+            assertEquals("http://154.123.12:55444", result);
+        }
+
+        function test_Add_BS_If_Missed() {
+            var result = Validation.NormalizeAddress("http:/ff06:0:0:0:0:0:0:c3")
+            assertEquals("http://ff06:0:0:0:0:0:0:c3", result);
+        }
+
+        function test_NormalizeAddress_ReturnsFullDomainName() {
+            var result = Validation.NormalizeAddress("http://server.a.b.c:8080/")
+            assertEquals("http://server.a.b.c:8080", result);
+        }
+
+        function test_GetServerAndPort_ReturnsOnlyServerAndPort_V1() {
+            var result = Validation.GetServerAndPort("http://domai.an.aa:8082/teamcity")
+            assertEquals("http://domai.an.aa:8082", result);
+        }
+
+        function test_GetServerAndPort_ReturnsOnlyServerAndPort_V2() {
+            var result = Validation.GetServerAndPort("http://domai.an.aa")
+            assertEquals("http://domai.an.aa", result);
+        }
+
+        function test_GetServerAndPort_ReturnsOnlyServerAndPort_V3() {
+            var result = Validation.GetServerAndPort("http://domai.an.aa:8080")
+            assertEquals("http://domai.an.aa:8080", result);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Tools
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_Do_Not_Swap_Image_If_Mouse_Is_Over_And_Disabled() {
+
+            var button = CreateButton("id", true);
+            var tool = new Tool();
+
+            button.over = true;
+            tool.SwapImage(button);
+            
+            assertEquals("./images/id_up.png", button.src);
+        }
+
+        function test_Do_Not_Swap_Image_If_Button_Is_Pressed_And_Disabled() {
+
+            var button = CreateButton("id", true);
+            var tool = new Tool();
+
+            button.down = true;
+            tool.SwapImage(button);
+
+            assertEquals("./images/id_up.png", button.src);
+        }
+
+        function test_Swap_Image_If_Mouse_Is_Over() {
+
+            var button = CreateButton("id", false);
+            var tool = new Tool();
+
+            button.over = true;
+            button.down = false;
+            tool.SwapImage(button);
+
+            assertEquals("./images/id_over.png", button.src);
+        }
+
+        function test_Swap_Image_If_Button_Is_Presses() {
+
+            var button = CreateButton("id", false);
+            var tool = new Tool();
+
+            button.over = true;
+            button.down = true;
+            tool.SwapImage(button);
+
+            assertEquals("./images/id_over.png", button.src);
+        }
+
+        function test_OnMouseOver_Set_Over() {
+
+            var button = CreateButton("id", false);
+            var tool = new Tool();
+
+            tool.SwapImage = function() { swapImage = true; }
+            tool.OnMouseOver(button);
+
+            assertTrue(swapImage);
+            assertTrue(button.over);
+        }
+
+        function test_OnMouseOut_Clear_Over() {
+
+            var button = CreateButton("id", false);
+            var tool = new Tool();
+
+            tool.SwapImage = function() { swapImage = true; }
+            tool.OnMouseOut(button);
+
+            assertTrue(swapImage);
+            assertFalse(button.over);
+        }
+
+        function test_OnMouseDown_Set_Down_And_Set_Capture() {
+            
+            var button = CreateButton("id", false);
+            button.setCapture = function() { setCapture = true; }
+            
+            var tool = new Tool();
+            tool.SwapImage = function() { swapImage = true; }
+            tool.OnMouseDown(button);
+
+            assertTrue(swapImage);
+            assertTrue(setCapture);
+            assertTrue(button.down);
+        }
+
+        function test_OnMouseUp_Clear_Up_And_Release_Capture() {
+
+            var button = CreateButton("id", false);
+            button.releaseCapture = function() { releaseCapture = true; }
+
+            var tool = new Tool();
+            tool.SwapImage = function() { swapImage = true; }
+            tool._ElementFromPoing = function() { return button; }
+            tool._RaiseMouseOutIfNeeded = function() { }
+
+            var event = new Object();
+            event.clientX = 0;
+            event.clientY = 0;
+            tool.OnMouseUp(button, event);
+
+            assertTrue(swapImage);
+            assertTrue(setCapture);
+            assertFalse(button.down);
+            assertTrue(button.over);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // HttpRequest
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_GetCharSetFromContentType_UpperCase_ExtractsCharSet() {
+            var request = new HttpRequest();
+            var result = request._GetCharSetFromContentType("TEXT/XML;CHARSET=UTF-8");
+
+            assertEquals("UTF-8", result);
+        }
+
+        function test_GetCharSetFromContentType_LowerCase_ExtractsCharSet() {
+            var request = new HttpRequest();
+            var result = request._GetCharSetFromContentType("text/xml;charset=utf-8");
+
+            assertEquals("utf-8", result);
+        }
+
+        function test_GetCharSetFromContentType_ContentWithSpaces_ExtractsCharSet() {
+            var request = new HttpRequest();
+            var result = request._GetCharSetFromContentType("abracadabra;charset = utf-8");
+
+            assertEquals("utf-8", result);
+        }
+
+        function test_GetCharSetFromContentType_ContentWithoutFirstPart_ExtractsCharSet() {
+            var request = new HttpRequest();
+            var result = request._GetCharSetFromContentType("charset = utf-8");
+
+            assertEquals("utf-8", result);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Environment
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_Gadget_Version() {
+            assertEquals("2.4", Environment.GetVersion());
+        }
+        
+        ///////////////////////////////////////////////////////////////////////////////
+        // Helper methods
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function CreateButton(id, disabled) {
+            var button = new Object;
+
+            button.id = id;
+            button.disabled = disabled;
+
+            return button;
+        }
+
+    </script>
+</head>
+<body>
+    <h1>
+        Eviroment and Format static helper cllasses tests</h1>
+    <p>
+        To see them, take a look at the source.</p>
+</body>
+</html>

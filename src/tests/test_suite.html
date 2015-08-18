@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>HTML parser tests</title>
+
+    <script type="text/javascript" language="javascript" src="../../../jsunit2_2/jsunit/app/jsUnitCore.js"></script>
+
+    <script type="text/javascript" language="javascript">
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Messages
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function suite() {
+            var newsuite = new JsUnitTestSuite();
+            newsuite.addTestPage("C:/Projects/TeamCity/Gadget/tests/test_environment.html");
+            newsuite.addTestPage("C:/Projects/TeamCity/Gadget/tests/test_html_parser.html");
+            newsuite.addTestPage("C:/Projects/TeamCity/Gadget/tests/test_html_builder.html");
+            return newsuite;
+        }
+
+    </script>
+</head>
+<body>
+    <h1>
+        Eviroment and Format static helper cllasses tests</h1>
+    <p>
+        To see them, take a look at the source.</p>
+</body>
+</html>

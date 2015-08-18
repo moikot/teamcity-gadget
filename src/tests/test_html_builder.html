@@ -1,0 +1,837 @@
+<html>
+<head>
+    <title>HTML parser tests</title>
+
+    <script type="text/javascript" language="javascript" src="../../../jsunit2_2/jsunit/app/jsUnitCore.js"></script>
+
+    <script type="text/javascript" language="javascript" src="../scripts/environment.js"></script>
+    
+    <script type="text/javascript" language="javascript" src="../scripts/object_model.js"></script>
+
+    <script type="text/javascript" language="javascript" src="../scripts/html_builder.js"></script>
+
+    <script type="text/javascript" language="javascript">
+
+        var _builder;
+        var _htmlData;
+
+        function setUp() {
+            _builder = new HtmlBuilder();
+            _htmlData = new HtmlData();
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // GetProjectBackgroundColor
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_GetProjectBackgroundColor_OnSuccess_ReturnsGreen() {
+            var backgroundColor = GetProjectBackgroundColor(ConfigurationStatus.Success);
+            assertEquals("green", backgroundColor);
+        }
+
+        function test_GetProjectBackgroundColor_OnError_ReturnsRed() {
+            var backgroundColor = GetProjectBackgroundColor(ConfigurationStatus.Error);
+            assertEquals("red", backgroundColor);
+        }
+
+        function test_GetProjectBackgroundColor_OnPaused_RetusrnsBlue() {
+            var backgroundColor = GetProjectBackgroundColor(ConfigurationStatus.Paused);
+            assertEquals("blue", backgroundColor);
+        }
+
+        function test_GetProjectBackgroundColor_OnPending_RetusrnsBlue() {
+            var backgroundColor = GetProjectBackgroundColor(ConfigurationStatus.Pending);
+            assertEquals("blue", backgroundColor);
+        }
+
+        function test_GetProjectBackgroundColor_OnIgnored_ReturnsGray() {
+            var backgroundColor = GetProjectBackgroundColor(ConfigurationStatus.Ignored);
+            assertEquals("gray", backgroundColor);
+        }
+
+        function test_GetProjectBackgroundColor_OnUnknown_ReturnsGray() {
+            var backgroundColor = GetProjectBackgroundColor(ConfigurationStatus.Unknown);
+            assertEquals("gray", backgroundColor);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // GetBuildStatusImage
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_GetBuildStatusImage_OnSuccess_ReturnsSuccess() {
+            var imageName = GetBuildStatusImageName(BuildStatus.Success);
+            assertEquals("success.png", imageName);
+        }
+
+        function test_GetBuildStatusImage_OnError_ReturnsError() {
+            var imageName = GetBuildStatusImageName(BuildStatus.Error);
+            assertEquals("error.png", imageName);
+        }
+
+        function test_GetBuildStatusImage_OnRunningGreen_ReturnsRunningGreen() {
+            var imageName = GetBuildStatusImageName(BuildStatus.RunningGreen);
+            assertEquals("running_green.gif", imageName);
+        }
+
+        function test_GetBuildStatusImage_OnRunningRed_ReturnsRunningRed() {
+            var imageName = GetBuildStatusImageName(BuildStatus.RunningRed);
+            assertEquals("running_red.gif", imageName);
+        }
+
+        function test_GetBuildStatusImage_OnPending_ReturnsPending() {
+            var imageName = GetBuildStatusImageName(BuildStatus.Pending);
+            assertEquals("pending.png", imageName);
+        }
+
+        function test_GetBuildStatusImage_OnCanceled_ReturnsCanceled() {
+            var imageName = GetBuildStatusImageName(BuildStatus.Canceled);
+            assertEquals("canceled.png", imageName);
+        }
+
+        function test_GetBuildStatusImage_OnUnknown_ReturnsGray() {
+            var imageName = GetBuildStatusImageName(BuildStatus.Unknown)
+            assertEquals("gray.png", imageName);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // GetPersonalBuildImage
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_GetPersonalBuildImage_OnSuccess_ReturnsPersonGreen() {
+            var imageName = GetPersonalBuildImageName(BuildStatus.Success)
+            assertEquals("person_green.png", imageName);
+        }
+
+        function test_GetPersonalBuildImage_OnError_ReturnsPersonRed() {
+            var imageName = GetPersonalBuildImageName(BuildStatus.Error);
+            assertEquals("person_red.png", imageName);
+        }
+
+        function test_GetPersonalBuildImage_OnRunningGreen_ReturnsPersonGreen() {
+            var imageName = GetPersonalBuildImageName(BuildStatus.RunningGreen);
+            assertEquals("person_green.png", imageName);
+        }
+
+        function test_GetPersonalBuildImage_OnRunningRed_ReturnsPersonRed() {
+            var imageName = GetPersonalBuildImageName(BuildStatus.RunningRed);
+            assertEquals("person_red.png", imageName);
+        }
+
+        function test_GetPersonalBuildImage_OnPending_ReturnsPersonBlue() {
+            var imageName = GetPersonalBuildImageName(BuildStatus.Pending);
+            assertEquals("person_blue.png", imageName);
+        }
+
+        function test_GetPersonalBuildImage_OnCanceled_ReturnsPersonBlue() {
+            var imageName = GetPersonalBuildImageName(BuildStatus.Canceled);
+            assertEquals("person_blue.png", imageName);
+        }
+
+        function test_GetPersonalBuildImage_OnUnknown_ReturnsPersonGray() {
+            var imageName = GetPersonalBuildImageName(BuildStatus.Unknown)
+            assertEquals("person_gray.png", imageName);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // GetConfigurationStatusImage
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_GetConfigurationStatusImage_OnSuccess_ReturnsSuccess() {
+            var imageName = GetConfigurationStatusImageName(ConfigurationStatus.Success);
+            assertEquals("success.png", imageName);
+        }
+
+        function test_GetConfigurationStatusImage_OnError_ReturnsError() {
+            var imageName = GetConfigurationStatusImageName(ConfigurationStatus.Error);
+            assertEquals("error.png", imageName);
+        }
+
+        function test_GetConfigurationStatusImage_OnFixing_ReturnsFixing() {
+            var imageName = GetConfigurationStatusImageName(ConfigurationStatus.Fixing);
+            assertEquals("fixing.png", imageName);
+        }
+
+        function test_GetConfigurationStatusImage_OnFixed_ReturnsFixed() {
+            var imageName = GetConfigurationStatusImageName(ConfigurationStatus.Fixed);
+            assertEquals("fixed.png", imageName);
+        }
+
+        function test_GetConfigurationStatusImage_OnIgnored_ReturnsIgnored() {
+            var imageName = GetConfigurationStatusImageName(ConfigurationStatus.Ignored);
+            assertEquals("ignored.png", imageName);
+        }
+
+        function test_GetConfigurationStatusImage_OnPaused_ReturnsPaused() {
+            var imageName = GetConfigurationStatusImageName(ConfigurationStatus.Paused);
+            assertEquals("paused.png", imageName);
+        }
+
+        function test_GetConfigurationStatusImage_OnPending_ReturnsPending() {
+            var imageName = GetConfigurationStatusImageName(ConfigurationStatus.Pending);
+            assertEquals("pending.png", imageName);
+        }
+
+        function test_GetConfigurationStatusImage_OnUnknown_ReturnsGray() {
+            var imageName = GetConfigurationStatusImageName(ConfigurationStatus.Unknown)
+            assertEquals("gray.png", imageName);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // ProjectBackground tests
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_GetProjectBackground_Html() {
+
+            _builder._GetProjectBackgroundColor = function() { return "color"; }
+            _builder._GetProjectBackground(_htmlData, ConfigurationStatus.Success, 100);
+
+            var background = _htmlData.GetHtml();
+            assertEquals("<img class=\"background_color\" src=\"./images/dot.png\" width=\"100\"/>", background);
+        }
+
+        function test_GetProjectItemBackground_NoConfigurations_GetsBackgorundForUnknownStatus() {
+
+            var backConfigurationStatus;
+
+            _builder._GetProjectBackground = function(htmlData, configuationStatus, width) {
+                backConfigurationStatus = configuationStatus;
+            }
+
+            _builder._GetProjectItemBackground(_htmlData, new Project());
+            assertEquals(ConfigurationStatus.Unknown, backConfigurationStatus);
+        }
+
+        function test_GetProjectItemBackground_NoConfigurations_GetsBackgorundForPanelWidth() {
+
+            var backWidth;
+
+            _builder.SetPanelWidth(100);
+            _builder._GetProjectBackground = function(htmlData, configuationStatus, width) {
+                backWidth = width;
+            }
+
+            _builder._GetProjectItemBackground(_htmlData, new Project());
+            assertEquals(100, backWidth);
+        }
+        
+        function test_Get_Project_Item_Background_With_Three_Configurations() {
+            
+            var callCnt = 0;
+            var states = [ConfigurationStatus.Success, ConfigurationStatus.Error,
+                          ConfigurationStatus.Unknown];
+
+            _builder.SetPanelWidth(100);
+            _builder._GetProjectBackground = function(htmlData, configuationStatus, width) {
+                assertEquals(states[callCnt++], configuationStatus);
+                htmlData.Push(width.toString());
+            }
+
+            var project = new Project("Name");
+            project.Configurations.push(new Configuration("C1", ConfigurationStatus.Success));
+            project.Configurations.push(new Configuration("C2", ConfigurationStatus.Error));
+            project.Configurations.push(new Configuration("C3", ConfigurationStatus.Unknown));
+
+            _builder._GetProjectItemBackground(_htmlData, project);
+
+            assertEquals(3, callCnt);
+            assertEquals("333433", _htmlData.GetHtml());
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Project collapse/expand images
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_Get_Collaps_Image_For_Expanded_Project() {
+            
+            var project = new Project("Proj");
+
+            _builder.IsProjectCollapsed = function(projectName) { return false; };
+            _builder._GetProjectItemImage(_htmlData, project);
+
+            var collapseHtml = '<img class="project_button" title = "Collapse" src="./images/collapse.png" onclick="Collapse(this, \'Proj\');"/>'
+            assertEquals(collapseHtml, _htmlData.GetHtml());
+        }
+
+        function test_Get_Expand_Image_For_Collapsed_Project() {
+            
+            var project = new Project("Proj");
+
+            _builder.IsProjectCollapsed = function(projectName) { return true; };
+            _builder._GetProjectItemImage(_htmlData, project);
+
+            var collapseHtml = '<img class="project_button" title = "Expand" src="./images/expand.png" onclick="Expand(this, \'Proj\');"/>'
+            assertEquals(collapseHtml, _htmlData.GetHtml());
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Build HTML generation tests
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_CombineBuildHtml_CalledWithImage_CombinesImageHTML() {
+
+            _builder._CombineBuildHtml(_htmlData, "Part1");
+
+            var buildHtml = "<div class=\"config_item_buld_image\"><img src=\"Part1\"/></div>";
+            assertEquals(buildHtml, _htmlData.GetHtml());
+        }
+
+        function test_GetRunningBuildHtml_ForConfigurationWithoutBuilds_ReturnsEmptyString() {
+
+            var configuration = new Configuration();
+            var result = GetRunningBuildHtml(configuration);
+            
+            assertEquals("", result);
+        }
+
+        function test_GetRunningBuildHtml_ForBuildStatusRunningGreen_ReturnsRunningGreenImg() {
+
+            var configuration = new Configuration();
+            configuration.Builds.push(new Build(BuildStatus.RunningGreen));
+
+            var result = GetRunningBuildHtml(configuration);
+            assertEquals("3", result);
+        }
+
+        function test_GetRunningBuildHtml_ForBuildStatusRunningRed_ReturnsRunningRedImg() {
+
+            var configuration = new Configuration();
+            configuration.Builds.push(new Build(BuildStatus.RunningRed));
+
+            var result = GetRunningBuildHtml(configuration);
+            assertEquals("4", result);
+        }
+
+        function test_GetRunningBuildHtml_ForMixedBuildRunningStatuses_ReturnsRunningGrayImg() {
+
+            var configuration = new Configuration();
+            configuration.Builds.push(new Build(BuildStatus.RunningGreen));
+            configuration.Builds.push(new Build(BuildStatus.RunningRed));
+
+            var result = GetRunningBuildHtml(configuration);
+            assertEquals("./images/states/running_gray.gif", result);
+        }
+
+        function test_GetRunningBuildHtml_ForPersonalBuildStatusRunningGreen_ReturnsRunningGreenImg() {
+
+            var configuration = new Configuration();
+            configuration.Builds.push(new Build(BuildStatus.RunningGreen, true));
+
+            var result = GetRunningBuildHtml(configuration);
+            assertEquals("3", result);
+        }
+
+        function test_GetRunningBuildHtml_ForPersonalBuildStatusRunningRed_ReturnsRunningRedImg() {
+
+            var configuration = new Configuration();
+            configuration.Builds.push(new Build(BuildStatus.RunningRed, true));
+
+            var result = GetRunningBuildHtml(configuration);
+            assertEquals("4", result);
+        }
+
+        function test_GetRunningBuildHtml_ForMixedPersonalBuildRunningStatuses_ReturnsRunningGrayImg() {
+
+            var configuration = new Configuration();
+            configuration.Builds.push(new Build(BuildStatus.RunningGreen, true));
+            configuration.Builds.push(new Build(BuildStatus.RunningRed, true));
+
+            var result = GetRunningBuildHtml(configuration);
+            assertEquals("./images/states/running_gray.gif", result);
+        }
+
+        function test_GetPersonalRunningBuildHtml_ForBuildStatusRunningGreen_ReturnsRunningGreenImg() {
+
+            var configuration = new Configuration();
+            configuration.Builds.push(new Build(BuildStatus.RunningGreen, true));
+
+            var result = GetPersonalRunningBuildHtml(configuration);
+            assertEquals("3", result);
+        }
+
+        function test_GetPersonalRunningBuildHtml_ForBuildStatusRunningRed_ReturnsRunningRedImg() {
+
+            var configuration = new Configuration();
+            configuration.Builds.push(new Build(BuildStatus.RunningRed, true));
+
+            var result = GetPersonalRunningBuildHtml(configuration);
+            assertEquals("4", result);
+        }
+
+        function test_GetPersonalRunningBuildHtml_ForMixedBuildRunningStatuses_ReturnsRunningGrayImg() {
+
+            var configuration = new Configuration();
+            configuration.Builds.push(new Build(BuildStatus.RunningGreen, true));
+            configuration.Builds.push(new Build(BuildStatus.RunningRed, true));
+
+            var result = GetPersonalRunningBuildHtml(configuration);
+            assertEquals("./images/states/person_gray.png", result);
+        }
+        
+        ///////////////////////////////////////////////////////////////////////////////
+        // Configuration HTML generation tests
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_Get_Configuration_Image_Html() {
+
+            _builder._GetConfigurationStatusImage = function(status) {
+                return status.toString();
+            }
+            
+            var config = new Configuration("Conf1", ConfigurationStatus.Success, "Message", "Link");
+            _builder._GetConfigurationImageHtml(_htmlData, config);
+
+            assertEquals("<div class=\"config_item_image\"><img src=\"1\"/></div>", _htmlData.GetHtml());
+        }
+
+        function test_GetConfigurationTextHtml_ForConfiguration_CobinesTextPartOfConfigurationItem() {
+
+            var config = new Configuration("Conf1", ConfigurationStatus.Success, "Link");
+
+            _builder.SetServerName("server/");
+            _builder._GetConfigurationTextHtml(_htmlData, config, 10);
+
+            assertEquals("<div class=\"config_item_text\"><a style=\"width:10px\" href=\"server/Link\" onmouseover=\"ItemOver(10)\">Conf1</a></div>", _htmlData.GetHtml());
+        }
+
+        function test_GetConfigurationHtml_CombinesConfigurationHtml() {
+
+            // Mocking
+            _builder._GetConfigurationImageHtml = function(htmlData, config) { htmlData.Push("Image_"); }
+            _builder._GetPersonalRunningBuildHtml = function(htmlData, config) { htmlData.Push("PersonalRunningBuild_"); }
+            _builder._GetRunningBuildHtml = function(htmlData, config) { htmlData.Push("RunningBuild_"); }
+            _builder._GetConfigurationTextHtml = function(htmlData, config) { htmlData.Push("Text_"); }
+
+            var config = new Configuration("",ConfigurationStatus.Unknown, "ConfLink");
+            _builder._GetConfigurationHtml(_htmlData, config);
+
+            assertEquals("<div class=\"config_item\"><div onclick=\"ShowFlyout('ConfLink')\">Image_RunningBuild_PersonalRunningBuild_</div>Text_</div>", _htmlData.GetHtml());                
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Project HTML generation tests
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_Get_Expanded_Configurations_Html() {
+
+            var configs = [new Configuration("Config1"),
+                           new Configuration("Config2")];
+            var result = GetConfigurationHtml(false, configs);
+
+            assertEquals("Config1Config2", result);
+        }
+
+        function test_Get_Collapsed_Configurations_Html() {
+
+            var configs = [new Configuration("Config1"),
+                           new Configuration("Config2")];
+            var result = GetConfigurationHtml(true, configs);
+            
+            assertEquals("", result);
+        }
+
+        function test_Get_Project_Item_Text() {
+
+            var project = new Project("Project");
+
+            _builder._GetProjectItemText(_htmlData, project, 10);
+            assertEquals("<div class=\"project_text\" style=\"width:10px\" onmouseover=\"ItemOver(10)\">Project</div>", _htmlData.GetHtml());
+        }
+
+        function test_Get_Project_Html() {
+
+            _builder._GetProjectItemBackground = function(htmlData, project) { htmlData.Push("Background"); }
+            _builder._GetProjectItemImage = function(htmlData, project) { htmlData.Push("Collapse"); }
+            _builder._GetProjectItemText = function(htmlData, project) { htmlData.Push("Text"); }
+            _builder._GetConfigurationsHtml = function(htmlData, project) { htmlData.Push("Configs"); }
+
+            var project = new Project("Project");
+            _builder._GetProjectHtml(_htmlData, project);
+            
+            assertEquals("<div class=\"project\" ondblclick=\"Collapse(this, 'Project')\">BackgroundCollapseText</div>Configs", _htmlData.GetHtml());
+        }
+
+        function test_GetHtml_ForAllProject_CombinesHtmlSequentally() {
+
+            _builder._GetProjectHtml = function(htmlData, project) { htmlData.Push(project.GetName()); }
+
+            var projects = [new Project("Project1"), new Project("Project2")];
+            var result = _builder.GetHtml(projects);
+
+            assertEquals("Project1Project2", result.GetHtml());
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Flyout
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_GetFlyoutConfigurationHtml_ForConfiguration_CombinesStatusMessage() {
+
+            var configuration = new Configuration();
+            var configurationData = new ConfigurationData("StatusMessage")
+            configuration.SetData(configurationData);
+
+            _builder._GetConfigurationStatusImage = function() { return "StatusImage"; }           
+            var confHtml = _builder.GetFlyoutConfigurationHtml(configuration);
+
+            assertEquals("<img class=\"flyoutStateImg\" src=\"StatusImage\"/>StatusMessage", confHtml);
+        }
+
+        function test_GetFlyoutBuildNumberHtml_CombinesBuildNumberCell() {
+        
+            _builder._GetFlyoutBuildNumberHtml(_htmlData, "BuildNumber");
+            assertEquals("<td style=\"text-align: center;\">BuildNumber</td>", _htmlData.GetHtml());
+        }
+
+        function test_GetFlyoutBuildStatusImageHtml_NotPersonalBuild_CombinesBuildStatusImageCell() {
+
+            _builder._GetBuildStatusImage = function() { return "StatusImage"; }           
+            
+            _builder._GetFlyoutBuildStatusImageHtml(_htmlData, "BuildStatus", "BuildStatusTooltip", false);
+            assertEquals("<td width=\"1%\"><img src=\"StatusImage\" title=\"BuildStatusTooltip\"/></td>", _htmlData.GetHtml());
+        }
+
+        function test_GetFlyoutBuildStatusImageHtml_PersonalBuild_CombinesBuildStatusImageCell() {
+
+            _builder._GetBuildStatusImage = function() { return "StatusImage"; }
+            _builder._GetPersonalBuildImage = function() { return "PersonalBuildImage"; }
+            
+            _builder._GetFlyoutBuildStatusImageHtml(_htmlData, "BuildStatus", "BuildStatusTooltip", true);
+            assertEquals("<td width=\"1%\"><img src=\"StatusImage\" title=\"BuildStatusTooltip\"/>" +
+                         "<img src=\"PersonalBuildImage\" title=\"BuildStatusTooltip\"/></td>", _htmlData.GetHtml());
+        }
+
+        function test_GetFlyoutBuildStatusMessageHtml_CombinesBuildStatusMessageCell() {
+
+            _builder.SetServerName("server/");
+            _builder._GetFlyoutBuildStatusMessageHtml(_htmlData, "BuildResults", "BuildResultsLink");
+            assertEquals("<td><a title=\"View build results\" href=\"server/BuildResultsLink\">BuildResults</a></td>", _htmlData.GetHtml());
+        }
+
+        function test_GetFlyoutBuildChangesHtml_BuildWithChanges_CombinesBuildChangesCell() {
+
+            _builder.SetServerName("server/");
+            _builder._GetFlyoutBuildChangesHtml(_htmlData, "BuildChanges", "BuildChangesLink");
+            assertEquals("<td><a title=\"Click to see changes\" href=\"server/BuildChangesLink\">BuildChanges</a></td>", _htmlData.GetHtml());
+        }
+
+        function test_GetFlyoutBuildChangesHtml_BuildWithoutChanges_CombinesBuildChangesCell() {
+
+            _builder._GetFlyoutBuildChangesHtml(_htmlData, null, null);
+            assertEquals("<td class=\"grayed\">No changes</td>", _htmlData.GetHtml());
+        }
+
+        function test_GetFlyoutBuildsTableRowHtml_CombinesBuildRow() {
+
+            _builder._GetFlyoutBuildNumberHtml = function(htmlData) { htmlData.Push("Number+"); }
+            _builder._GetFlyoutBuildStatusImageHtml = function(htmlData) { htmlData.Push("Image+"); }
+            _builder._GetFlyoutBuildStatusMessageHtml = function(htmlData) { htmlData.Push("Status+"); }
+            _builder._GetFlyoutBuildChangesHtml = function(htmlData) { htmlData.Push("Changes"); }
+
+            var build = new Build();
+            var buildData = new BuildData();
+
+            build.SetData(buildData);
+
+            _builder._GetFlyoutBuildsTableRowHtml(_htmlData, build);
+            assertEquals("<tr>Number+Image+Status+Changes</tr>", _htmlData.GetHtml());
+        }
+
+        function test_GetFlyoutBuildsTableHtml_CreatesBuildsTable() {
+
+            var configuration = new Configuration();
+            var build = new Build();
+
+            configuration.Builds.push(build);
+            _builder._GetFlyoutBuildsTableRowHtml = function(htmlData) {
+                htmlData.Push("BuildRow");
+            }
+
+            var tableHtml = _builder.GetFlyoutBuildsTableHtml(configuration);
+            assertEquals("<table id=\"buildsTable\"><tr><th class=\"firstCell\">#</th>" +
+                         "<th colspan=\"2\">Results</th><th class=\"lastCell\">Changes</th></tr>"+
+                         "BuildRow</table>", tableHtml);
+        }
+        
+        ///////////////////////////////////////////////////////////////////////////////
+        // Getters and setters
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_SetPanelWidth_SetsPanelWidth() {
+            _builder.SetPanelWidth(100);
+            assertEquals(100, _builder.GetPanelWidth());
+        }
+
+        function test_SetProjectCollapsed_SetsProjectCollapsingState() {
+            _builder.SetProjectCollapsed("Proj1", true);
+            assertEquals(true, _builder.IsProjectCollapsed("Proj1"));
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Initial state and reset
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function test_HtmlBuilder_Constructed() {
+            assertEquals(0, _builder.GetPanelWidth());
+            assertEquals(false, _builder.IsProjectCollapsed("Proj1"));
+        }
+
+        function test_Rest_Builder_To_Initial_State() {
+
+            _builder.SetPanelWidth(100);
+            _builder.SetProjectCollapsed("Proj1", true);
+
+            _builder.Reset();
+
+            assertEquals(0, _builder.GetPanelWidth());
+            assertEquals(false, _builder.IsProjectCollapsed("Proj1"));
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Helper functions
+        ///////////////////////////////////////////////////////////////////////////////
+
+        function GetConfigurationHtml(collapsed, configs) {
+
+            _builder.IsProjectCollapsed = function(project) { return collapsed; }
+            _builder._GetConfigurationHtml = function(htmlData, config) { htmlData.Push(config.GetName()); }
+
+            var project = new Project("Project");
+            project.Configurations = configs;
+
+            _builder._GetConfigurationsHtml(_htmlData, project);
+            return _htmlData.GetHtml();
+        }
+
+        function GetRunningBuildHtml(configuration) {
+
+            _builder._GetBuildStatusImage = function(status) {
+                return status.toString();
+            }
+
+            _builder._CombineBuildHtml = function(htmlData, buildImage) {
+                htmlData.Push(buildImage);
+            }
+
+            _builder._GetRunningBuildHtml(_htmlData, configuration);
+            return _htmlData.GetHtml();
+        }
+
+        function GetPersonalRunningBuildHtml(configuration) {
+
+            _builder._GetPersonalBuildImage = function(status) {
+                return status.toString();
+            }
+
+            _builder._CombineBuildHtml = function(htmlData, buildImage) {
+                htmlData.Push(buildImage);
+            }
+
+            _builder._GetPersonalRunningBuildHtml(_htmlData, configuration);
+            return _htmlData.GetHtml();
+        }
+
+        function GetConfigurationStatusImage(configurationStatus) {
+            return _builder._GetConfigurationStatusImage(configurationStatus);
+        }
+
+        function GetConfigurationStatusImageName(configurationStatus) {
+            var path = GetConfigurationStatusImage(configurationStatus);
+            return path.replace("./images/states/", "");
+        }
+
+        function GetBuildStatusImage(buildStatus) {
+            return _builder._GetBuildStatusImage(buildStatus);
+        }
+
+        function GetBuildStatusImageName(buildStatus) {
+            var path = GetBuildStatusImage(buildStatus);
+            return path.replace("./images/states/", "");
+        }
+
+        function GetPersonalBuildImage(buildStatus) {
+            return _builder._GetPersonalBuildImage(buildStatus);
+        }
+
+        function GetPersonalBuildImageName(buildStatus) {
+            var path = GetPersonalBuildImage(buildStatus);
+            return path.replace("./images/states/", "");
+        }
+
+        function GetRunningBuildImage(config) {
+            return _builder._GetRunningBuildImage(config);
+        }
+
+        function GetPersonalRunningBuildImage(config) {
+            return _builder._GetPersonalRunningBuildImage(config);
+        }
+
+        function GetProjectBackgroundColor(configurationStatus) {
+            return _builder._GetProjectBackgroundColor(configurationStatus);
+        }
+
+    </script>
+
+    <style type="text/css">
+        body
+        {
+            color: white;
+            background-color: black;
+        }
+    </style>
+</head>
+<body onload="OnLoad();">
+
+    <script language="javascript">
+
+        function OnLoad() {
+            setUp();
+            InitializeConfigurationStatusTable();
+            InitializeBuildStatusTable();
+            InitializeRunningBuildStatusTable();
+            InitializePersonalRunningBuildStatusTable();
+        }
+
+        function InitializeConfigurationStatusTable() {
+            var html = [];
+
+            html.push("<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\" cellpadding=\"0\">");
+            html.push("<tr><td>Configuration state</td><td>Configuration state image</td><td>Project background</td>");
+            html.push(GetConfigurationStatusImageRow("ConfigurationStatus.Success"));
+            html.push(GetConfigurationStatusImageRow("ConfigurationStatus.Error"));
+            html.push(GetConfigurationStatusImageRow("ConfigurationStatus.Fixing"));
+            html.push(GetConfigurationStatusImageRow("ConfigurationStatus.Fixed"));
+            html.push(GetConfigurationStatusImageRow("ConfigurationStatus.Paused"));
+            html.push(GetConfigurationStatusImageRow("ConfigurationStatus.Pending"));
+            html.push(GetConfigurationStatusImageRow("ConfigurationStatus.Ignored"));            
+            html.push(GetConfigurationStatusImageRow("ConfigurationStatus.Unknown"));
+            html.push("</table>");
+
+            configuration_states.innerHTML = html.join('');
+        }
+
+        function GetConfigurationStatusImageRow(configStatusName) {
+
+            var status = eval(configStatusName);
+            var src = "../" + GetConfigurationStatusImage(status);
+            var html = [];
+            var color = GetProjectBackgroundColor(status)
+
+            html.push("<tr><td>" + configStatusName + "</td>");
+            html.push("<td><img src=\"" + src + "\"/></td>");
+            html.push("<td style=\"color:" + color + "\">" + color + "</td></tr>");
+
+            return html.join('');
+        }
+
+        function InitializeBuildStatusTable() {
+            var html = [];
+            
+            html.push("<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\" cellpadding=\"0\">");
+            html.push("<tr><td>Build state</td><td>Build state image</td><td>Personal</td>");
+            html.push(GetBuildImageRow("BuildStatus.Success"));
+            html.push(GetBuildImageRow("BuildStatus.Error"));
+            html.push(GetBuildImageRow("BuildStatus.RunningGreen"));
+            html.push(GetBuildImageRow("BuildStatus.RunningRed"));
+            html.push(GetBuildImageRow("BuildStatus.Pending"));
+            html.push(GetBuildImageRow("BuildStatus.Canceled"));
+            html.push(GetBuildImageRow("BuildStatus.Unknown"));
+            html.push("</table>");
+
+            build_states.innerHTML = html.join('');
+        }
+
+        function InitializeRunningBuildStatusTable() {
+            var html = [];
+
+            html.push("<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\" cellpadding=\"0\">");
+            html.push("<tr><td>Running build state</td><td>Build state image</td>");
+            html.push(GetRunningBuildImageRow("BuildStatus.RunningGreen", "BuildStatus.RunningGreen"));
+            html.push(GetRunningBuildImageRow("BuildStatus.RunningRed", "BuildStatus.RunningRed"));
+            html.push(GetRunningBuildImageRow("BuildStatus.RunningGreen", "BuildStatus.RunningRed"));
+            html.push("</table>");
+
+            running_build_states.innerHTML = html.join('');
+        }
+
+        function InitializePersonalRunningBuildStatusTable() {
+            var html = [];
+
+            html.push("<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\" cellpadding=\"0\">");
+            html.push("<tr><td>Personal running build state</td><td>Build state image</td>");
+            html.push(GetPersonalRunningBuildImageRow("BuildStatus.RunningGreen", "BuildStatus.RunningGreen"));
+            html.push(GetPersonalRunningBuildImageRow("BuildStatus.RunningRed", "BuildStatus.RunningRed"));
+            html.push(GetPersonalRunningBuildImageRow("BuildStatus.RunningGreen", "BuildStatus.RunningRed"));
+            html.push("</table>");
+
+            personal_running_build_states.innerHTML = html.join('');
+        }
+
+        function GetBuildImageRow(buildStatusName) {
+
+            var status = eval(buildStatusName);
+            var buildStatusSrc = "../" + GetBuildStatusImage(status);
+            var personalBuildSrc = "../" + GetPersonalBuildImage(status);
+            var html = [];
+
+            html.push("<tr><td>" + buildStatusName + "</td>");
+            html.push("<td><img src=\"" + buildStatusSrc + "\"/></td>");
+            html.push("<td><img src=\"" + personalBuildSrc + "\"/></td></tr>");
+
+            return html.join('');
+        }
+
+        function GetRunningBuildImageRow(buildStatusName1, buildStatusName2) {
+
+            var status1 = eval(buildStatusName1);
+            var status2 = eval(buildStatusName2);
+
+            var config = new Configuration();
+            config.Builds.push(new Build(status1));
+            config.Builds.push(new Build(status2));
+
+            var src = "../" + GetRunningBuildImage(config);
+            var html = [];
+
+            html.push("<tr><td>" + buildStatusName1 + ", " + buildStatusName2 + "</td>");
+            html.push("<td><img src=\"" + src + "\"/></td></tr>");
+
+            return html.join('');
+        }
+
+        function GetPersonalRunningBuildImageRow(buildStatusName1, buildStatusName2) {
+            
+            var status1 = eval(buildStatusName1);
+            var status2 = eval(buildStatusName2);
+
+            var config = new Configuration();
+            config.Builds.push(new Build(status1, true));
+            config.Builds.push(new Build(status2, true));
+
+            var src = "../" + GetPersonalRunningBuildImage(config);
+            var html = [];
+
+            html.push("<tr><td>" + buildStatusName1 + ", " + buildStatusName2 + "</td>");
+            html.push("<td><img src=\"" + src + "\"/></td></tr>");
+
+            return html.join('');
+        }
+
+    </script>
+
+    <h1>
+        HTML builder Tests</h1>
+    <p>
+        This page contains tests HTML builder. To see them, take a look at the source.</p>
+    <div id = "configuration_states">
+    </div>     
+    <p></p>   
+    <div id = "build_states">
+    </div>
+    <p></p>   
+    <div id = "running_build_states">
+    </div>
+    <p></p>   
+    <div id = "personal_running_build_states">
+    </div>
+</body>
+</html>
