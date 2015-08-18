@@ -1,0 +1,1 @@
+TeamCity Gadget for Windows Desktop
