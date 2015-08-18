@@ -1,0 +1,40 @@
+﻿<html>
+<head>
+    <title>TeamCity Gadget</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="css/gadget.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" language="javascript" src="scripts/environment.js"></script>
+    <script type="text/javascript" language="javascript" src="scripts/scroll_bar.js"></script>
+    <script type="text/javascript" language="javascript" src="scripts/object_model.js"></script>
+    <script type="text/javascript" language="javascript" src="scripts/html_parser.js"></script>
+    <script type="text/javascript" language="javascript" src="scripts/html_builder.js"></script>
+    <script type="text/javascript" language="javascript" src="scripts/gadget.js"></script> 
+
+</head>
+<body unselectable="on" scroll="no" dir="ltr" onload="OnPageLoad();" onmouseover="scrollbar.Show();" onmouseout="scrollbar.Hide();">
+    <g:background id="background" style="position:absolute;z-index:-1"></g:background>
+    <span id="ruler" style="visibility:hidden; white-space:nowrap"></span>
+    <div id="container">
+        <div id="content_panel_fixed">
+            <div id="content_panel"/>
+        </div>
+    </div>
+    <div id="scrollbar_panel" onfocusin="scrollbar.Show();" onfocusout="scrollbar.Hide();">
+        <img id="scroll_track"/>
+        <img id="scroll_thumb"/>
+    </div>
+    <div id="buttons_panel">
+        <div id="refresh">
+            <img id="refresh_button" title='Refresh' onclick='Refresh();' />
+            <img id="loading_image" title='Refreshing...' onclick='serverRequest.Cancel();'/>
+        </div>
+        <img id="collapse_all" title='Collapse All' onclick='CollapseAll();' />
+        <img id="expand_all" title='Expand All' onclick='ExpandAll();' />
+        <img id="projects" title='Go to "Projects" page' onclick='Environment.OpenOverview();' />
+        <img id="my_changes" title='Go to "My Changes" page' onclick='Environment.OpenMyChanges();' />
+        <img id="my_settings" title='Go to "My Settings" page' onclick='Environment.OpenMyProfile();' />
+        <img id="grip"/>
+    </div>
+</body>
+</html>

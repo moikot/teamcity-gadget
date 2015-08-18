@@ -1,0 +1,32 @@
+<!--//
+////////////////////////////////////////////////////////////////////////////////
+//
+//  THIS CODE IS NOT APPROVED FOR USE IN/ON ANY OTHER UI ELEMENT OR PRODUCT COMPONENT.  
+//  Copyright (c) 2009 Sergey Anisimov.  All rights reserved.
+//
+////////////////////////////////////////////////////////////////////////////////
+//-->
+
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <title>Configuration Details Flyout</title>
+    <script type="text/javascript" language="javascript" src="scripts/environment.js"></script>
+    <script type="text/javascript" language="javascript" src="scripts/object_model.js"></script>
+    <script type="text/javascript" language="javascript" src="scripts/html_parser.js"></script>
+    <script type="text/javascript" language="javascript" src="scripts/html_builder.js"></script>
+    <script type="text/javascript" language="javascript" src="scripts/gadget.js"></script> 
+    <link href="css/flyout_details.css" rel="stylesheet" type="text/css" />
+</head>
+<body onkeydown="CloseOnEscape();">
+    <div id="flyoutBack">
+       <div id="flyoutProjectLink"></div>
+       <a id="flyoutConfigLink"></a>
+       <div id="flyoutMain">
+            <div id="flyoutConfigState"></div>
+            <div id="flyoutBuildStates"></div>    
+       </div>
+    </div>
+    <g:background id="flyout_background" style="z-index:-1" src="images/background/flyout_background.png" />
+</body>
+</html>

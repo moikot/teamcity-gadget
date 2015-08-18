@@ -1,0 +1,158 @@
+/*
+//---------------------------------------------
+//  THIS CODE IS NOT APPROVED FOR USE IN/ON ANY OTHER UI ELEMENT OR PRODUCT COMPONENT.  
+//  Copyright (c) 2009 Sergey Anisimov.  All rights reserved.
+// ----------------------------------------------
+*/
+
+body
+{
+    margin: 0px;
+    padding: 0px;
+    width: 370px;
+    height: 280px;
+    background-color: black;
+    background-repeat: no-repeat;
+    font-size: 12px;
+    font-family: Segoe UI;
+    
+    scrollbar-3dlight-color: #1A1A1A;
+    scrollbar-arrow-color: #ff9933;
+    scrollbar-base-color: #333333;
+    scrollbar-darkshadow-color: #1A1A1A;
+    scrollbar-face-color: #333333;
+    scrollbar-highlight-color: #41403F;
+    scrollbar-shadow-color: #1A1A1A;
+}
+
+div#flyoutBack
+{
+    position: absolute;
+    left: 5px;
+    top: 3px;
+}
+
+#flyoutProjectLink
+{
+    position: absolute;
+    left: 3px;
+    top: 1px;
+    width: 353px;
+    height: 16px;
+    color: aqua;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+a#flyoutConfigLink
+{
+    position: absolute;
+    left: 3px;
+    top: 16px;
+    width: 353px;
+    height: 16px;
+    color: aqua;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+a#flyoutConfigLink:hover
+{
+    color: aqua;
+}
+
+div#flyoutMain
+{
+    position: absolute;
+    left: 0px;
+    top: 34px;
+    width: 359px;
+    height: 237px;
+    color: #FFFFFF;
+    overflow: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 6px;
+}
+
+#flyoutConfigState
+{
+    left: 3px;
+    top: 0px;
+}
+
+.flyoutStateImg
+{
+    border: medium none;
+    vertical-align: middle;
+    margin-right: 1px;
+}
+
+#flyoutBuildState
+{
+    position: relative;
+}
+
+table
+{
+    margin-top: 7px;
+    color: #FFFFFF;
+    width: 100%;
+    border: 0px;
+    border-collapse: collapse;
+}
+
+tr th.firstCell
+{
+    text-align: center;
+    width: 18%;
+    border-left: 1px solid #41403F;
+}
+
+tr th.lastCell
+{
+    width: 23%;
+    border-right: 1px solid #41403F;
+}
+
+table th
+{
+    background: #333333;
+    color: #ff9933;
+    border-top: 1px solid #41403F;
+    border-bottom: 1px solid #41403F;
+    text-align: left;
+    font-size: 12px;
+    padding: 3px 1px;
+}
+
+table td
+{
+    border-bottom: 1px solid #41403F;
+    text-align: left;
+    font-size: 12px;
+    padding-top: 4px;
+    padding: 4px 1px;
+    color: #FFFFFF;
+}
+
+table td a
+{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+table td a:hover
+{
+    text-decoration: underline;
+}
+
+table td.grayed
+{
+    color: #636363;
+}

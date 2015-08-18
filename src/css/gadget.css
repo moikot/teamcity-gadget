@@ -1,0 +1,247 @@
+﻿
+/**********************************************************
+// Body Styles
+**********************************************************/
+
+body
+{
+	margin: 0px;
+	padding: 0px;
+	font-family: Segoe UI;
+	font-size: 11px;
+}
+
+a:link
+{
+	text-decoration: none;
+}
+
+a:visited
+{
+	text-decoration: none;
+}
+
+a:active
+{
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: none;
+}
+
+/**********************************************************
+// Projects panel style
+**********************************************************/
+
+#content_panel_fixed
+{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	overflow: hidden;
+}
+
+#content_panel
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+}
+
+.warning
+{
+	font-size: 12px;
+    color: #FF8888;
+    text-align:center;
+}
+
+.information
+{
+    font-size: 12px;
+    color: #88FF88;
+    text-align:center;
+}
+
+.information a
+{
+    font-size: 12px;
+    color: #88FF88;
+	text-decoration: underline;
+}
+
+/**********************************************************
+// Items style
+**********************************************************/
+
+.project
+{
+	height: 14px;
+	width: 100%;
+	position: relative;
+}
+
+.background_green
+{
+	height: 14px;
+	background: url( '../images/project_back_green.png' ) 0px 0px repeat-x;
+}
+
+.background_red
+{
+	height: 14px;
+	background: url( '../images/project_back_red.png' ) 0px 0px repeat-x;
+}
+
+.background_gray
+{
+	height: 14px;
+	background: url( '../images/project_back_gray.png' ) 0px 0px repeat-x;
+}
+
+.background_orange
+{
+	height: 14px;
+	background: url( '../images/project_back_orange.png' ) 0px 0px repeat-x;
+}
+
+.background_blue
+{
+	height: 14px;
+	background: url( '../images/project_back_blue.png' ) 0px 0px repeat-x;
+}
+
+.project_button
+{	
+	position: absolute;
+	left: 0px;
+}
+
+.project_text
+{
+	left: 9px;
+	top: 0px;
+	position: absolute;	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.config_item
+{
+	height: 14px;
+	width:100%;
+	position:relative;
+}
+
+.config_item_image
+{
+	float: left;
+}
+
+.config_item_buld_image
+{
+	float: left;
+}
+
+.config_item_text
+{
+    color: aqua;
+}
+
+.config_item_text a
+{
+    position: absolute;	
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: aqua;
+}
+
+/**********************************************************
+// Buttons panel style
+**********************************************************/
+
+#buttons_panel
+{
+	position: absolute;
+	left: 3px;
+}
+
+#refresh
+{
+	position: absolute;
+    left: 2px;
+}
+
+#loading_image
+{   
+    display: none;
+}
+
+#collapse_all
+{
+	position: absolute;
+	left: 17px;
+}
+
+#expand_all
+{
+	position: absolute;
+	left: 32px;
+}
+
+#projects
+{
+	position: absolute;
+	left: 47px;
+}
+
+#my_changes
+{
+	position: absolute;
+	left: 62px;
+}
+
+#my_settings
+{
+	position: absolute;
+	left: 77px;
+}
+
+#grip
+{
+	position: absolute;
+	top: 5px;
+}
+
+/**********************************************************
+// Scroll bar
+**********************************************************/
+
+#scrollbar_panel
+{
+    position:absolute;
+    top: 5px;
+    filter:alpha(opacity=0);
+    z-index:3; 
+    width:8px;
+}  
+
+#scroll_track
+{
+	position: absolute;
+	width: 8px;
+	top: 0px;
+	z-index:1;	
+}
+
+#scroll_thumb
+{
+	position: absolute;
+	width: 8px;
+	top: 0px;
+	z-index:2;
+}

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gadget>
+	<name>TeamCity Gadget</name>
+	<namespace></namespace>
+	<version>2.92.0</version>
+	<author name="Sergey Anisimov">
+		<info url="http://www.teamcity-gadget.com/"  text="www.teamcity-gadget.com"/>
+		<logo src="icon.png" />
+	</author>
+	<copyright>© 2009 by Sergey Anisimov</copyright>
+	<description>The TeamCity Gadget displays a brief summary of your TeamCity server status.</description>
+	<icons>
+		<icon height="64" width="64" src="icon.png" />
+	</icons>
+	<hosts>
+		<host name="sidebar">
+			<base type="HTML" apiVersion="1.0" src="gadget.html" />
+			<permissions>Full</permissions>
+			<platform minPlatformVersion="1.0"/>
+			<defaultImage src="drag.png" /> 
+		</host>
+	</hosts>
+</gadget>
