@@ -442,29 +442,12 @@ describe("Html parser", function() {
 
     function CheckBuildStatus(imageName, statusRequired, isPersonalRequired) {
 
-        var imageTag = "<img src=\"" + imageName + "\"/>";
-
-        var status = GetBuildStatus(imageTag);
-        var isPersonal = IsBuildPersonal(imageTag);
+        var status = _parser._GetBuildStatus(imageName);
+        var isPersonal = _parser._IsBuildPersonal(imageName);
 
         expect(status).toBe(statusRequired);
         expect(isPersonal).toBe(isPersonalRequired);
     }
 
-    function GetBuildStatus(nodeText) {
-
-        _xmlDoc.loadXML(nodeText);
-        var image_node = _xmlDoc.documentElement;
-
-        return _parser._GetBuildStatus(image_node);
-    }
-
-    function IsBuildPersonal(nodeText) {
-
-        _xmlDoc.loadXML(nodeText);
-        var image_node = _xmlDoc.documentElement;
-
-        return _parser._IsBuildPersonal(image_node);
-    }
 });
 

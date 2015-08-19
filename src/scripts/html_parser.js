@@ -49,16 +49,14 @@ function HtmlParser() {
     // Extracts build status from the image name
     ///////////////////////////////////////////////////////////////////////////////
 
-    this._GetBuildStatus = function(buildImage) {
+    this._GetBuildStatus = function(imageName) {
 
-        var srcAttr = buildImage.getAttribute("src");
-        if (srcAttr == null)
-            return BuildStatus.Unknown;
-
-        var imageName = srcAttr.toLowerCase();
+        imageName = imageName.toLowerCase();
 
         if (imageName.indexOf("running_red") != -1 ||
-	        imageName.indexOf("runningfailing") != -1)
+            imageName.indexOf("running-red") != -1 ||
+	        imageName.indexOf("runningfailing") != -1 ||
+            imageName.indexOf("running-failing") != -1)
             return BuildStatus.RunningRed;
 
         if (imageName.indexOf("running") != -1)
@@ -89,13 +87,9 @@ function HtmlParser() {
     // Extracts build type from the image name
     ///////////////////////////////////////////////////////////////////////////////
 
-    this._IsBuildPersonal = function(buildImage) {
+    this._IsBuildPersonal = function(imageName) {
 
-        var srcAttr = buildImage.getAttribute("src");
-        if (srcAttr == null)
-            return false;
-
-        var imageName = srcAttr.toLowerCase();
+        var imageName = imageName.toLowerCase();
         return (imageName.indexOf("personal") != -1);
     }; 
     
@@ -345,13 +339,23 @@ function HtmlParser() {
     this._ParseBuild = function(buildRow) {
 
         var buildImage = buildRow.selectSingleNode(".//td[not(@class)]/img");
-        if (buildImage == null)
+        if (buildImage != null) {
+            var srcAttr = buildImage.getAttribute("src");
+        } else {
+            buildImage = buildRow.selectSingleNode(".//td/span[@id]");
+            if (buildImage == null)
+                return null;
+
+            srcAttr = buildImage.getAttribute("class");
+        }
+
+        if (srcAttr == null)
             return null;
 
-        var buildSatus = this._GetBuildStatus(buildImage);
-        var isPersonal = this._IsBuildPersonal(buildImage);
+        var buildStatus = this._GetBuildStatus(srcAttr);
+        var isPersonal = this._IsBuildPersonal(srcAttr);
 
-        return new Build(buildSatus, isPersonal, buildRow);
+        return new Build(buildStatus, isPersonal, buildRow);
     }; 
     
     ///////////////////////////////////////////////////////////////////////////////
