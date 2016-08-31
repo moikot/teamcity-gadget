@@ -2,7 +2,7 @@
 
 ## Build
 
-In order to build TeamCity Gadget, you need to have [Node.js/npm](https://nodejs.org/en/download/) and [git](https://git-scm.com/downloads). 
+In order to build TeamCity Gadget, you need to have [Node.js/npm](https://nodejs.org/en/download/) and [git](https://git-scm.com/downloads) installed. 
 
 Clone a copy of the main git repo by running:
 
@@ -10,7 +10,7 @@ Clone a copy of the main git repo by running:
 git clone git://github.com/sanisimov/teamcity-gadget.git
 ```
 
-Tun the build script:
+Run the build script:
 ```bash
 npm run build
 ```
