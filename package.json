@@ -7,6 +7,12 @@
     "test": "tests"
   },
   "dependencies": {
+  },
+  "devDependencies": {
+    "grunt": "1.0.1",
+    "grunt-cli": "1.2.0",
+    "grunt-contrib-compress": "^0.13.0",
+    "grunt-rename": "^0.1.4",
     "grunt": "^0.4.5",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.9",
@@ -14,11 +20,8 @@
     "karma-ie-launcher": "^0.2.0",
     "karma-jasmine": "^0.3.6"
   },
-  "devDependencies": {
-    "grunt-contrib-compress": "^0.13.0",
-    "grunt-rename": "^0.1.4"
-  },
   "scripts": {
+    "build": "npm install && grunt", 
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sergey Anisimov",
