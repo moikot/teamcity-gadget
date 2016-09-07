@@ -97,13 +97,12 @@ function HtmlParser() {
     // Extracts configuration status from the image name
     ///////////////////////////////////////////////////////////////////////////////
 
-    this._GetConfigurationStatus = function(configImage) {
+    this._GetConfigurationStatus = function(imageName) {
 
-        var srcAttr = configImage.getAttribute("src");
-        if (srcAttr == null)
+        if (imageName == null)
             return ConfigurationStatus.Unknown;
 
-        var imageName = srcAttr.toLowerCase();
+        var imageName = imageName.toLowerCase();
 
         if (imageName.indexOf("success") != -1)
             return ConfigurationStatus.Success;
@@ -141,6 +140,8 @@ function HtmlParser() {
             throw "configurationElement is null";
 
         var configImage = configurationElement.selectSingleNode(".//img");
+        if (configImage == null)
+            configImage = configurationElement.selectSingleNode(".//span");
         if (configImage == null)
             return null;
 
@@ -402,6 +403,14 @@ function HtmlParser() {
     this._ParseConfiguration = function(configNode, project) {
 
         var configImage = configNode.selectSingleNode(".//img");
+        if (configImage != null) {
+            var srcAttr = configNode.getAttribute("src");
+        } else {
+            configImage = configNode.selectSingleNode(".//span");
+            if (configImage == null)
+                return null;
+            srcAttr = configImage.getAttribute("class");
+        }
         var configLink = configNode.selectSingleNode(".//a");
 
         if (configImage == null || configLink == null)
@@ -412,7 +421,7 @@ function HtmlParser() {
             return null;
 
         var name = this._UnEscape(configLink.text);
-        var status = this._GetConfigurationStatus(configImage);
+        var status = this._GetConfigurationStatus(srcAttr);
         var link = this._UnEscape(linkAttr.text);
 
         var configuration = new Configuration(name, status, link, project, configNode);
