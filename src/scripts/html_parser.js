@@ -108,10 +108,12 @@ function HtmlParser() {
             return ConfigurationStatus.Success;
 
         if (imageName.indexOf("errorwithresp") != -1 ||
-            imageName.indexOf("investigate") != -1)
+            imageName.indexOf("investigate") != -1 || 
+            imageName.indexOf("taken") != -1)
             return ConfigurationStatus.Fixing;
 
-        if (imageName.indexOf("error") != -1)
+        if (imageName.indexOf("error") != -1 || 
+	        imageName.indexOf("failed") != -1)
             return ConfigurationStatus.Error;
 
         if (imageName.indexOf("fixed") != -1)
