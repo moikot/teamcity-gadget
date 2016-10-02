@@ -7,7 +7,7 @@ TeamCity Gadget uses the same settings and notification rules as JetBrains TeamC
 ## Layout
 
 <div style="text-align:center">
-![Gadget layout](design/gadget_layout.png "Gadget layout")
+![Gadget layout](design/gadget_layout.png)
 </div>
 
 ### Configuration State Icon
@@ -48,7 +48,7 @@ Personal build state icon indicates that personal build is running for the corre
 It is possible to open up a flyout with additional information for the particular build configuration by clicking on Configuration State Icon, Build State Icon or Personal Build State Icon.
 
 <div style="text-align:center">
-![Gadget flyout](design/gadget_flyout.png "Gadget flyout")
+![Gadget flyout](design/gadget_flyout.png)
 </div>
 
 The build state icon indicates the status of the build and can be followed by the custom build icon with correspondent color:
