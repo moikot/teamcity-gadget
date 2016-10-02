@@ -6,9 +6,7 @@ TeamCity Gadget uses the same settings and notification rules as JetBrains TeamC
 
 ## Layout
 
-<div style="text-align:center">
-![Gadget layout](design/gadget_layout.png)
-</div>
+![gadget_layout]
 
 ### Configuration State Icon
 
@@ -47,9 +45,7 @@ Personal build state icon indicates that personal build is running for the corre
 
 It is possible to open up a flyout with additional information for the particular build configuration by clicking on Configuration State Icon, Build State Icon or Personal Build State Icon.
 
-<div style="text-align:center">
-![Gadget flyout](design/gadget_flyout.png)
-</div>
+![gadget_flyout]
 
 The build state icon indicates the status of the build and can be followed by the custom build icon with correspondent color:
 
@@ -62,6 +58,9 @@ The build state icon indicates the status of the build and can be followed by th
 |![pending]|![person_blue]| The build is pending
 |![ignored]|![person_blue]|	The build is canceled
 |![unknown]|![person_gray]|	The build is in unknown state
+
+[gadget_layout]:/design/gadget_layout.png
+[gadget_flyout]:/design/gadget_flyout.png
 
 [success]:/design/success.png
 [error]:/design/error.png
