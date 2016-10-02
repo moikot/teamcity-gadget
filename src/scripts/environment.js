@@ -746,7 +746,7 @@ Environment.GetVersion = function() {
 ///////////////////////////////////////////////////////////////////////////////
 
 Environment.GetVersionUrl = function() {
-    return "http://teamcity-gadget.com/version.dat";
+    return "https://github.com/anisimovsergey/teamcity-gadget/version.dat";
 };
 
 ///////////////////////////////////////////////////////////////////////////////

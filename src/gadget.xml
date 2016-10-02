@@ -4,7 +4,7 @@
 	<namespace></namespace>
 	<version>2.93.0</version>
 	<author name="Sergey Anisimov">
-		<info url="http://www.teamcity-gadget.com/"  text="www.teamcity-gadget.com"/>
+		<info url="https://github.com/anisimovsergey/teamcity-gadget"  text="TeamCity gadget"/>
 		<logo src="icon.png" />
 	</author>
 	<copyright>© 2009 by Sergey Anisimov</copyright>
