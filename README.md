@@ -87,7 +87,7 @@ The build state icon indicates the status of the build and can be followed by th
 [person_gray]:/design/person_gray.png
 
 ## Dowloads
-The latest versions of the gadgets can be found on [http://www.teamcity-gadget.com/](http://www.teamcity-gadget.com/)
+The latest versions of the gadgets can be found [here](https://github.com/anisimovsergey/teamcity-gadget/releases)
 
 ## Build
 
