@@ -25,10 +25,17 @@ module.exports = function(grunt) {
                 dest: './dist/TeamCityGadget.gadget'
             }
         }
+        carma: {
+            unit: {
+                configFile: 'karma.conf.js'
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-rename');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', ['compress','rename']);
+    grunt.registerTask('test', ['carma']);
 };
