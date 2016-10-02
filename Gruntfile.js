@@ -24,7 +24,7 @@ module.exports = function(grunt) {
                 src: 'TeamCityGadget.zip',
                 dest: './dist/TeamCityGadget.gadget'
             }
-        }
+        },
         carma: {
             unit: {
                 configFile: 'karma.conf.js'
