@@ -1,5 +1,9 @@
 # TeamCity garget is a Windows desktop gadget for TeamCity.
 
+This gadget receives the information about project builds from [JetBrains TeamCity](https://www.jetbrains.com/teamcity/) build management server and combine it into a compact view. Since  TeamCity Gadget uses the same information channel as JetBrains TeamCity Tray Notifier there is no need in the additional plug-ins on the server side, just install the gadget, provide the URL to TeamCity server, and it is ready to go.
+
+TeamCity Gadget uses the same settings and notification rules as JetBrains TeamCity [Tray Notifier](https://confluence.jetbrains.com/display/TCD8/Windows+Tray+Notifier) and allows instantly evaluate the build state of the projects and the configurations you are interested in. It is always available on your sidebar if you are on Windows Vista and on your desktop in case of Windows 7. The major advantage of TeamCity Gadget is the ability to represent the project build state in compact way by colorizing background of the project name with different colors corresponding to the build configuration state.
+
 ## Dowloads
 The latest versions of the gadgets can be found on [http://www.teamcity-gadget.com/](http://www.teamcity-gadget.com/)
 
