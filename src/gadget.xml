@@ -2,7 +2,7 @@
 <gadget>
 	<name>TeamCity Gadget</name>
 	<namespace></namespace>
-	<version>2.93.0</version>
+	<version>2.94.0</version>
 	<author name="Sergey Anisimov">
 		<info url="https://github.com/anisimovsergey/teamcity-gadget"  text="TeamCity gadget"/>
 		<logo src="icon.png" />

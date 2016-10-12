@@ -1,6 +1,6 @@
 {
   "name": "TeamCityGadget",
-  "version": "2.93.0",
+  "version": "2.94.0",
   "description": "Windows gadget for TeamCity",
   "main": "karma.conf.js",
   "directories": {

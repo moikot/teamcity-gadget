@@ -4,18 +4,20 @@ module.exports = function(grunt) {
         compress: {
             main: {
                 options: {
+	            mode: 'zip',
+		    level: 2,
                     archive: 'TeamCityGadget.zip'
                 },
                 files: [
-                    {src: ['src/css/**'], dest: '/'},
-                    {src: ['src/images/**'], dest: '/'},
-                    {src: ['src/scripts/**'], dest: '/'},
-                    {src: ['src/drag.png'], dest: '/'},
-                    {src: ['src/flyout_details.html'], dest: '/'},
-                    {src: ['src/gadget.html'], dest: '/'},
-                    {src: ['src/gadget.xml'], dest: '/'},
-                    {src: ['src/icon.png'], dest: '/'},
-                    {src: ['src/settings.html'], dest: '/'}
+                    {expand: true, cwd: 'src/', src: ['css/**'], dest: '/'},
+                    {expand: true, cwd: 'src/', src: ['images/**'], dest: '/'},
+                    {expand: true, cwd: 'src/', src: ['scripts/**'], dest: '/'},
+                    {expand: true, cwd: 'src/', src: ['drag.png'], dest: '/'},
+                    {expand: true, cwd: 'src/', src: ['flyout_details.html'], dest: '/'},
+                    {expand: true, cwd: 'src/', src: ['gadget.html'], dest: '/'},
+                    {expand: true, cwd: 'src/', src: ['gadget.xml'], dest: '/'},
+                    {expand: true, cwd: 'src/', src: ['icon.png'], dest: '/'},
+                    {expand: true, cwd: 'src/', src: ['settings.html'], dest: '/'}
                 ]
             }
         },
