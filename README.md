@@ -4,7 +4,7 @@ This is a Windows sidebar/desktop gadget for TeamCity. It receives the informati
 
 TeamCity Gadget uses the same settings and notification rules as JetBrains TeamCity [Tray Notifier](https://confluence.jetbrains.com/display/TCD8/Windows+Tray+Notifier) and allows to instantly evaluate the build state of the projects and the configurations you are interested in. It is always available on your sidebar if you are on Windows Vista and on your desktop in case of Windows 7. The major advantage of TeamCity Gadget is the ability to represent the project build state in a compact way by colorizing background of the project name with different colors corresponding to the build configuration state.
 
-## Dowloads
+## Downloads
 
 The latest versions of the gadgets can be found [here](https://github.com/anisimovsergey/teamcity-gadget/releases)
 
